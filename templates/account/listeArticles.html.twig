@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <div class="container-fluid">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Auteur</th>
+                    <th scope="col">Date de création</th>
+                    <th scope="col">Article premium</th>
+                    <th class="text-center" scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set counter = 0 %}
+                {% for article in articles %}
+                    {% set counter = counter + 1  %}
+                <tr>
+                    <th scope="row">{{ counter }}</th>
+                    <td>{{ article.titre }}</td>
+                    <td>{{ article.description }}</td>
+                    <td>{{ article.auteur.fullname }}</td>
+                    <td>{{ article.creationDate|date('d/m/Y') }}</td>
+                    <td class="text-center">{{ article.isPremium == false ? "Non " : "Oui" }}</td>
+                    <td><button type="button" class="btn btn-primary">Modifier</button> <button  class="btn btn-primary" type="button">Supprimer</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

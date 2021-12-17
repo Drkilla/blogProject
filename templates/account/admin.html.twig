@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Espace Administration</h1>
+    <hr>
+    -<a href="{{ path('creationArticle') }}">Créer un article</a><br>
+    -<a href="{{ path('articleCrud') }}">Consulter et gérer mes articles</a><br>
+    -<a>Gérer les utilisateurs</a><br>
+    <hr>
+{% endblock %}
