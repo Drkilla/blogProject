@@ -27,10 +27,6 @@ class Article
      */
     private $description;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $contenu;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class)
@@ -52,6 +48,11 @@ class Article
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $contenu;
 
     public function getId(): ?int
     {

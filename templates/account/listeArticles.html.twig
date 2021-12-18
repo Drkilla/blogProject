@@ -5,11 +5,11 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Titre</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Auteur</th>
-                    <th scope="col">Date de création</th>
-                    <th scope="col">Article premium</th>
+                    <th class="text-center" scope="col">Titre</th>
+                    <th class="text-center" scope="col">Description</th>
+                    <th class="text-center" scope="col">Auteur</th>
+                    <th class="text-center" scope="col">Date de création</th>
+                    <th class="text-center" scope="col">Article premium</th>
                     <th class="text-center" scope="col">Actions</th>
                 </tr>
             </thead>
@@ -19,12 +19,12 @@
                     {% set counter = counter + 1  %}
                 <tr>
                     <th scope="row">{{ counter }}</th>
-                    <td>{{ article.titre }}</td>
-                    <td>{{ article.description }}</td>
-                    <td>{{ article.auteur.fullname }}</td>
-                    <td>{{ article.creationDate|date('d/m/Y') }}</td>
+                    <td class="text-center">{{ article.titre }}</td>
+                    <td class="text-center">{{ article.description }}</td>
+                    <td class="text-center">{{ article.auteur.fullname }}</td>
+                    <td class="text-center">{{ article.creationDate|date('d/m/Y') }}</td>
                     <td class="text-center">{{ article.isPremium == false ? "Non " : "Oui" }}</td>
-                    <td><button type="button" class="btn btn-primary">Modifier</button> <button  class="btn btn-primary" type="button">Supprimer</button></td>
+                    <td class="text-center"><a href="{{ path('articleEdit',{'id':article.id}) }}" class="btn btn-primary">Modifier</a> <a  class="btn btn-primary" href="{{ path('articleDelete',{'id':article.id}) }}">Supprimer</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
