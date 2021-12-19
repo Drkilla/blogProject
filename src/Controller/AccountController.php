@@ -111,8 +111,9 @@ class AccountController extends AbstractController
 
     /**
      *
-     * @Route("/mon-compte/administration/delete/article/{id}" , name="articleDelete")
+     * @Route("/mon-compte/administration/delete/article/{article}" , name="articleDelete")
      * @IsGranted("ROLE_ADMIN")
+     *
      */
     public function articleDelete(Article $article):Response
     {

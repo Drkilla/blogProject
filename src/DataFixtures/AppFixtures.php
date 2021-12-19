@@ -5,17 +5,23 @@ namespace App\DataFixtures;
 use App\Entity\Article;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class AppFixtures
-    extends Fixture
-{
 
+
+class AppFixtures
+    extends Fixture implements DependentFixtureInterface
+{
     public function load( ObjectManager $manager ): void
     {
-        $user = $manager->getRepository(User::class)->find(1);
 
-        for( $i = 0; $i < 20; $i ++ ) {
+        $user = $manager->getRepository(User::class)->findOneBy([
+            'id'=>1
+        ]);
+        dd($user);
+
+        for( $i = 0; $i < 10; $i ++ ) {
             $article = new Article();
 
             $date = new \DateTime( 'NOW' );
@@ -28,10 +34,19 @@ class AppFixtures
             Cras a euismod libero, in convallis lorem. Sed tempor pharetra felis id condimentum. Etiam leo lacus, molestie in elementum vitae, volutpat eget urna. Aliquam erat volutpat. Vestibulum eu tincidunt lacus, sed rutrum nunc. Nam bibendum viverra erat, ut blandit ligula. Morbi justo ipsum, ultricies vel ligula sed, pharetra tempus tortor. In lobortis leo ac velit sollicitudin dignissim. Cras tincidunt, lacus id mattis mattis, ante orci commodo risus, vitae mattis augue eros vehicula orci. Nam auctor velit quam, at venenatis elit vestibulum a. Donec tempor, leo sed aliquam cursus, mauris ligula varius ligula, a rutrum ligula nisi quis dui. ' );
             $article->setIsPremium(false);
             $article->setCreationDate( $date );
+            $article->setImage('http://placehold.it/200x100');
             $article->setAuteur($user);
             $manager->persist( $article );
+            $manager->flush($article);
         }
 
-        $manager->flush( $article );
+
+    }
+
+    public function getDependencies()
+    {
+        return[
+            UserFixtures::class,
+        ];
     }
 }

@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block content %}
     <h1>Mon compte</h1>
-    <a href="{{ path('dashboard') }}">Administration</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        - <a href="{{ path('dashboard') }}">Administration</a><br>
+    {% endif %}
+        - <a href="">Devenir premium</a>
 {% endblock %}

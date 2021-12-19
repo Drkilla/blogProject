@@ -24,7 +24,7 @@
                     <td class="text-center">{{ article.auteur.fullname }}</td>
                     <td class="text-center">{{ article.creationDate|date('d/m/Y') }}</td>
                     <td class="text-center">{{ article.isPremium == false ? "Non " : "Oui" }}</td>
-                    <td class="text-center"><a href="{{ path('articleEdit',{'id':article.id}) }}" class="btn btn-primary">Modifier</a> <a  class="btn btn-primary" href="{{ path('articleDelete',{'id':article.id}) }}">Supprimer</a></td>
+                    <td class="text-center"><a href="{{ path('articleEdit',{'id':article.id}) }}" class="btn btn-primary">Modifier</a> <a  class="btn btn-primary" href="{{ path('articleDelete',{'article':article.id}) }}">Supprimer</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
