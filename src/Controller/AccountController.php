@@ -14,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Constraints\Date;
 
+
 class AccountController extends AbstractController
 {
     private $entityManager;
@@ -25,6 +26,7 @@ class AccountController extends AbstractController
 
     /**
      * @Route("/mon-compte", name="compte")
+     *
      */
     public function index(): Response
     {
@@ -34,20 +36,19 @@ class AccountController extends AbstractController
     }
 
     /**
-     * IsGranted('ROLE_ADMIN')
      * @Route("/mon-compte/administration" , name="dashboard")
+     * @IsGranted("ROLE_ADMIN")
      *
     */
-    public function adminDashboard():Response
+    public function adminDashboard()
     {
 
         return $this->render('account/admin.html.twig');
     }
 
     /**
-     * isGranted('ROLE_ADMIN')
      * @Route("/mon-compte/administration/creation-article", name="creationArticle")
-     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function createArticle(Request $request,SluggerInterface $slugger):Response
     {
@@ -93,23 +94,25 @@ class AccountController extends AbstractController
     }
 
     /**
-     * isGranted('ROLE_ADMIN')
+     *
      * @Route("/mon-compte/administration/mes-articles" , name="articleCrud")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function articlesCrud():Response
     {
         $articles = $this->entityManager->getRepository(Article::class)->findBy([
             'auteur'=>$this->getUser()->getId()
         ]);
-        /*dd($articles);*/
+
         return $this->render('account/listeArticles.html.twig',[
             'articles'=>$articles
         ]);
     }
 
     /**
-     * isGranted('ROLE_ADMIN')
+     *
      * @Route("/mon-compte/administration/delete/article/{id}" , name="articleDelete")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function articleDelete(Article $article):Response
     {
@@ -120,8 +123,9 @@ class AccountController extends AbstractController
     }
 
     /**
-     * isGranted('ROLE_ADMIN')
+     *
      * @Route("/mon-compte/administration/modifier/article/{id}" , name="articleEdit")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function articleEdit(Request $request, $id):Response
     {
